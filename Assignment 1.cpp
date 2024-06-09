@@ -83,13 +83,13 @@ public:
         }
     }
 
-    void display(CircularLinkedList* head){
+    void display(Node* head){
         //if the list is empty
         if (head == nullptr) {
         cout << "List is empty" << endl;
         return;
         }
-        CircularLinkedList* temp = head;
+        Node* temp = head;
         //
         do {
         cout<< temp->value <<" ";
