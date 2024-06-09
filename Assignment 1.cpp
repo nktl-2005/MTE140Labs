@@ -11,7 +11,24 @@ public:
     };
 
     Node* head;
-    void insertion(){}
+    void insertion(Node *& head, int value){
+    Node* newNode = new Node(value);
+    // if list is empty
+    if (head == nullptr) {
+    head = newNode;
+    newNode->next = head;
+    } else {
+    Node* temp = head;
+
+    //Go through to the last node
+    while (temp->next != head){
+    temp = temp->next;
+    }
+    //Point the last node to the new node, and the new node to the head
+    temp->next = newNode;
+    newNode->next = head;
+    }
+    }
     
     void deletion(CircularLinkedList* head, int delete_number){
         // in the case that the list is empty
@@ -67,11 +84,13 @@ public:
     }
 
     void display(CircularLinkedList* head){
+        //if the list is empty
         if (head == nullptr) {
         cout << "List is empty" << endl;
         return;
         }
         CircularLinkedList* temp = head;
+        //
         do {
         cout<< temp->value <<" ";
         temp = temp->next;
