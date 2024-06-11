@@ -98,9 +98,25 @@ public:
         cout << endl;
     }
 
-    void search(){
 
+    int search(CircularLinkedList* head, int target) {
+        
+        here->head;
+
+        // Search through the list until you find the target,
+        // or the list ends
+        while(here->data != target && here->link != NULL) {
+            here=here->next;
+        }
+
+        // If the target was found, return the index
+        if(here->data == target){
+            return here;
+        } else { // If the list ends, return nothing
+            return NULL;
+        }
     }
+
 };
 typedef CircularLinkedList* Node;
 int main() {
