@@ -1,18 +1,16 @@
-//
 #include <iostream>
 using namespace std;
-class CircularLinkedList {
+
+class Node {
 public:
-    struct Node {
-        int data;
-        Node* next;
+    int data;
+    Node* next;
+};
 
-        Node(int value) : data(value), next(nullptr) {}
-    };
+void insertion(Node *& head, int value){
+    Node* newNode = new Node();
+    newNode->data = value;
 
-    Node* head;
-    void insertion(Node *& head, int value){
-    Node* newNode = new Node(value);
     // if list is empty
     if (head == nullptr) {
     head = newNode;
@@ -28,9 +26,9 @@ public:
     temp->next = newNode;
     newNode->next = head;
     }
-    }
-    
-    void deletion(CircularLinkedList* head, int delete_number){
+}
+
+void deletion(Node* head, int delete_number){
         // in the case that the list is empty
         if (head==nullptr || !head) {
             cout << "List is empty and therefore the number is not in the list" << endl;
@@ -83,7 +81,7 @@ public:
         }
     }
 
-    void display(Node* head){
+void display(Node* head){
         //if the list is empty
         if (head == nullptr) {
         cout << "List is empty" << endl;
@@ -92,38 +90,61 @@ public:
         Node* temp = head;
         //
         do {
-        cout<< temp->value <<" ";
+        cout<< temp->data <<" ";
         temp = temp->next;
         } while (temp != head);
         cout << endl;
     }
 
+int search(Node* head, int target) {
+    Node* here = head;
+    int count = 0;
 
-    int search(CircularLinkedList* head, int target) {
-        
-        here->head;
+    while(here->data != target && here->next != head) {
+       
+        here = here->next;
+        count = count + 1;
 
-        // Search through the list until you find the target,
-        // or the list ends
-        while(here->data != target && here->link != NULL) {
-            here=here->next;
+        if(count >= 100) { // If the target isn't found in 100 tries, stop trying
+            break;
         }
 
-        // If the target was found, return the index
-        if(here->data == target){
-            return here;
-        } else { // If the list ends, return nothing
-            return NULL;
-        }
     }
 
-};
-typedef CircularLinkedList* Node;
+    if(here->data == target) {
+            return count;
+        } else {
+            return -1;
+        }
+}
+
 int main() {
-    Node *head = new Node();
-    Node *second = new Node();
+    // Make a circular linked list where each node is named a number from 0-3, 
+    // and the data it holds is an int of that number
+    Node* zero = new Node();
+    zero->data = 0;
+    Node* one = new Node();
+    zero->next = one;
+    one->data = 1;
+    Node* two = new Node();
+    one->next = two;
+    two->data = 2;
+    Node* three = new Node();
+    two->next = three;
+    three->data = 3;
+    three->next = zero;
 
+    // Execute functions
+    int search_target = 3;
+    int target_index = search(zero, search_target);
+    cout << "the index of the node containing " << search_target << " is " <<target_index;
+    cout << endl;
 
+    insertion(zero, 4);
+
+    deletion(zero, 3);
+
+    display(zero);
 
     return 0;
 }
