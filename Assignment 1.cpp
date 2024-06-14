@@ -1,23 +1,22 @@
 #include <iostream>
 using namespace std;
+
 class CircularLinkedList {
 public:
-    struct Node {
-        int data;
-        Node* next;
+    int data;
+    CircularLinkedList* next;
+};
 
-        Node(int value) : data(value), next(nullptr) {}
-    };
+void insertion(CircularLinkedList *& head, int value){
+    CircularLinkedList* newNode = new CircularLinkedList();
+    newNode->data = value;
 
-    Node* head;
-    void insertion(Node *& head, int value){
-    Node* newNode = new Node(value);
     // if list is empty
     if (head == nullptr) {
     head = newNode;
     newNode->next = head;
     } else {
-    Node* temp = head;
+    CircularLinkedList* temp = head;
 
     //Go through to the last node
     while (temp->next != head){
@@ -27,23 +26,23 @@ public:
     temp->next = newNode;
     newNode->next = head;
     }
-    }
-    
-    void deletion(CircularLinkedList* head, int delete_number){
+}
+
+void deletion(CircularLinkedList* head, int delete_number){
         // in the case that the list is empty
         if (head==nullptr || !head) {
             cout << "List is empty and therefore the number is not in the list" << endl;
             return;
         }
         // initizaiting these pointers to changge once the delete number is found
-        Node* curr = head;
-        Node* prev = nullptr;
-        Node* lastOccur = nullptr;
-        Node* lastOccurPrev = nullptr;
+        CircularLinkedList* curr = head;
+        CircularLinkedList* prev = nullptr;
+        CircularLinkedList* lastOccur = nullptr;
+        CircularLinkedList* lastOccurPrev = nullptr;
 
        // setting values to last node to work backwards
        do {
-            if (curr->data = delete_number){
+            if (curr->data == delete_number){
                 lastOccur = curr;
                 lastOccurPrev = prev;
             }
@@ -64,16 +63,16 @@ public:
                 head = nullptr;
             }
             else { //there is more than 1 node in the list
-                Node* temp = head;
+                CircularLinkedList* temp = head;
                 while (temp->next !=head) {
                     temp = temp->next;
                 }
                 // resigning the pointers and deleting the entry correctly
                 temp->next = head->next;
-                Node* toDelete = head;
+                CircularLinkedList* toDelete = head;
                 head = head->next;
                 delete toDelete;
-            } 
+            }
         }
         else {
             // if the number is not the head node
@@ -82,47 +81,71 @@ public:
         }
     }
 
-    void display(Node* head){
+void display(CircularLinkedList* head){
         //if the list is empty
         if (head == nullptr) {
         cout << "List is empty" << endl;
         return;
         }
-        Node* temp = head;
+        CircularLinkedList* temp = head;
         //
         do {
-        cout<< temp->value <<" ";
+        cout<< temp->data <<" ";
         temp = temp->next;
         } while (temp != head);
         cout << endl;
     }
 
+int search(CircularLinkedList* head, int pick) {
 
-    int search(CircularLinkedList* head, int target) {
-        
-        here->head;
+    // Initialize varibles
+    CircularLinkedList* here = head;
+    int count = 0;
 
-        // Search through the list until you find the target,
-        // or the list ends
-        while(here->data != target && here->link != NULL) {
-            here=here->next;
-        }
+    // While the target isn't found and we haven't searched a full length of the list
+    while(here->data != pick && here->next != head) {
 
-        // If the target was found, return the index
-        if(here->data == target){
-            return here;
-        } else { // If the list ends, return nothing
-            return NULL;
-        }
+       // Go to the next node and increment the index counter
+        here = here->next;
+        count = count + 1;
+
     }
 
-};
-typedef CircularLinkedList* Node;
+    // If the while loop terminated because the target was found, then return the couted index
+    if(here->data == pick) {
+            return count;
+        } else { // If we reached the end of the list, return -1
+            return -1;
+        }
+}
+
 int main() {
-    Node *head = new Node();
-    Node *second = new Node();
+    // Make a circular linked list where each node is named a number from 0-3,
+    // and the data it holds is an int of that number
+    CircularLinkedList* zero = new CircularLinkedList();
+    zero->data = 0;
+    CircularLinkedList* one = new CircularLinkedList();
+    zero->next = one;
+    one->data = 1;
+    CircularLinkedList* two = new CircularLinkedList();
+    one->next = two;
+    two->data = 2;
+    CircularLinkedList* three = new CircularLinkedList();
+    two->next = three;
+    three->data = 3;
+    three->next = zero;
 
+    // Execute functions
+    int search_target = 3;
+    int target_index = search(zero, search_target);
+    cout << "The index of the node containing " << search_target << " is: " <<target_index;
+    cout << endl;
 
+    insertion(zero, 4);
+
+    deletion(zero, 1);
+
+    display(zero);
 
     return 0;
 }
