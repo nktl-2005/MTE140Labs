@@ -87,9 +87,11 @@ void display(CircularLinkedList* head){
         cout << "List is empty" << endl;
         return;
         }
+        //Create a temporary pointer to start at head
         CircularLinkedList* temp = head;
-        //
+        //go through the list until we get to the head again
         do {
+        //print the data of the node and move to the next node in the list
         cout<< temp->data <<" ";
         temp = temp->next;
         } while (temp != head);
