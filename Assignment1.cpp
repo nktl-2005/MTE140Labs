@@ -42,7 +42,7 @@ void deletion(Node* head, int delete_number){
 
        // setting values to last node to work backwards
        do {
-            if (curr->data = delete_number){
+            if (curr->data == delete_number){
                 lastOccur = curr;
                 lastOccurPrev = prev;
             }
@@ -142,7 +142,7 @@ int main() {
 
     insertion(zero, 4);
 
-    deletion(zero, 3);
+    deletion(zero, 1);
 
     display(zero);
 
