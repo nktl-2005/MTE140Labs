@@ -5,6 +5,10 @@ class CircularLinkedList {
 public:
     int data;
     CircularLinkedList* next;
+    void insertion(CircularLinkedList *& head, int value);
+    void deletion(CircularLinkedList* head, int delete_number);
+    void display(CircularLinkedList* head);
+    int search(CircularLinkedList* head, int pick);
 };
 
 void insertion(CircularLinkedList *& head, int value){
