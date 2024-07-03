@@ -10,4 +10,4 @@ using namespace std;
 
 // PrintSol function (void) to print the solution using Solution function
 
-main() {} 
+main() {}
