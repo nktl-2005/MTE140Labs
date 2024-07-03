@@ -5,10 +5,6 @@ class CircularLinkedList {
 public:
     int data;
     CircularLinkedList* next;
-    void insertion(CircularLinkedList *& head, int value);
-    void deletion(CircularLinkedList* head, int delete_number);
-    void display(CircularLinkedList* head);
-    int search(CircularLinkedList* head, int pick);
 };
 
 void insertion(CircularLinkedList *& head, int value){
@@ -76,7 +72,7 @@ void deletion(CircularLinkedList* head, int delete_number){
                 CircularLinkedList* toDelete = head;
                 head = head->next;
                 delete toDelete;
-            } 
+            }
         }
         else {
             // if the number is not the head node
@@ -91,9 +87,11 @@ void display(CircularLinkedList* head){
         cout << "List is empty" << endl;
         return;
         }
+        //Create a temporary pointer to start at head
         CircularLinkedList* temp = head;
-        //
+        //go through the list until we get to the head again
         do {
+        //print the data of the node and move to the next node in the list
         cout<< temp->data <<" ";
         temp = temp->next;
         } while (temp != head);
@@ -101,14 +99,14 @@ void display(CircularLinkedList* head){
     }
 
 int search(CircularLinkedList* head, int pick) {
-    
+
     // Initialize varibles
     CircularLinkedList* here = head;
     int count = 0;
 
     // While the target isn't found and we haven't searched a full length of the list
     while(here->data != pick && here->next != head) {
-       
+
        // Go to the next node and increment the index counter
         here = here->next;
         count = count + 1;
@@ -124,7 +122,7 @@ int search(CircularLinkedList* head, int pick) {
 }
 
 int main() {
-    // Make a circular linked list where each node is named a number from 0-3, 
+    // Make a circular linked list where each node is named a number from 0-3,
     // and the data it holds is an int of that number
     CircularLinkedList* zero = new CircularLinkedList();
     zero->data = 0;
