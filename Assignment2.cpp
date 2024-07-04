@@ -22,6 +22,7 @@ bool isSafe(int row, int col, int n, vector<int>& queen) {
         }
 
     }
+}
 
 // Solution (bool?) returns if the solution is possible and solves it
 
