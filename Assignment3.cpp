@@ -4,7 +4,8 @@ using namespace std;
 
 class MaxHeap {
 private:
-    vector<int> heap;
+    vector<pair<string, int>> heap; //changing each node to now store the patient name and their
+                                    //corresponding priority number
 
     int parent(int i) { return (i - 1) / 2; }
     int leftChild(int i) { return 2 * i + 1; }
@@ -35,16 +36,16 @@ private:
     }
 
 public:
-    void insert(int key) {
-        heap.push_back(key);
+    void insert(string patient_name, int priority) {
+        heap.push_back(make_pair(patient_name,priority));
         heapifyUp(heap.size() - 1);
     }
 
-    int extractMax() {
+    pair<string,int> extractMax() {
         if (heap.size() == 0)
             throw runtime_error("Heap is empty");
 
-        int root = heap[0];
+        pair<string,int> root = heap[0];
         heap[0] = heap.back();
         heap.pop_back();
         heapifyDown(0);
@@ -52,9 +53,9 @@ public:
         return root;
     }
 
-    void printHeap() {
-        for (int i : heap) {
-            cout << i << " ";
+    void printHeap() { //changing to showcase priority number and name of patient when printing
+        for (const pair<string, int>& entry : heap) {
+            cout << entry.first << " (" << entry.second << ") ";
         }
         cout << endl;
     }
