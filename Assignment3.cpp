@@ -12,7 +12,7 @@ private:
     int rightChild(int i) { return 2 * i + 2; }
 
     void heapifyUp(int i) {
-        while (i != 0 && heap[parent(i)] < heap[i]) {
+        while (i != 0 && heap[parent(i)].second < heap[i].second) {
             swap(heap[i], heap[parent(i)]);
             i = parent(i);
         }
@@ -23,10 +23,10 @@ private:
         int left = leftChild(i);
         int right = rightChild(i);
 
-        if (left < heap.size() && heap[left] > heap[largest])
+        if (left < heap.size() && heap[left].second > heap[largest].second)
             largest = left;
 
-        if (right < heap.size() && heap[right] > heap[largest])
+        if (right < heap.size() && heap[right].second > heap[largest].second)
             largest = right;
 
         if (largest != i) {
