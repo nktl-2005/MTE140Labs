@@ -60,12 +60,13 @@ public:
         }
         cout << endl;
     }
-
+    //added a bool function to check if the heap is empty and return true or false
     bool isEmpty(){
         return heap.empty();
     }
 };
 int main() {
+    //inserting patients into MaxHeap
     MaxHeap patients;
     patients.insert("Patient A", 5);
     patients.insert("Patient B", 9);
@@ -77,6 +78,7 @@ int main() {
     patients.printHeap();
 
     cout << "Extracting patients based on priority:" << endl;
+    //extract until bool returns true
     while (!patients.isEmpty()) {
         pair<string, int> patient = patients.extractMax();
         cout << "Calling patient: " << patient.first << endl;
