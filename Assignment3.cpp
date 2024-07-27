@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <string>
 using namespace std;
 
 class MaxHeap {
@@ -59,4 +60,26 @@ public:
         }
         cout << endl;
     }
+
+    bool isEmpty(){
+        return heap.empty();
+    }
 };
+int main() {
+    MaxHeap patients;
+    patients.insert("Patient A", 5);
+    patients.insert("Patient B", 9);
+    patients.insert("Patient C", 3);
+    patients.insert("Patient D", 5);
+    patients.insert("Patient E", 7);
+
+    cout << "Initial heap: ";
+    patients.printHeap();
+
+    cout << "Extracting patients based on priority:" << endl;
+    while (!patients.isEmpty()) {
+        pair<string, int> patient = patients.extractMax();
+        cout << "Calling patient: " << patient.first << endl;
+    }
+    return 0;
+}
